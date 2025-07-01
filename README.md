@@ -1,2 +1,2 @@
-# Thank you for your response!
+# Thank you!
 Your rating has been recorded.
