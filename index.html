@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,34 +16,23 @@
 
     async function sendPost() {
       const payload = getQueryParams();
-      const flowUrl = "https://prod-165.westus.logic.azure.com:443/workflows/93df22cd0f7a47cfac53756728cd428c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zFJRqzOZkP0tbc8tpORBOeUtj5mguNl4JJfw8V2Q-Tc";
+      const flowUrl = "https://prod-165.westus.logic.azure.com:443/workflows/93df22cd0f7a47cfac53756728cd428c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zFJRqzOZkP0tbc8tpORBOeUtj5mguNl4JJfw8V2Q-Tc"; // Paste Power Automate POST URL here
 
       try {
-        const res = await fetch(flowUrl, {
+        await fetch(flowUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(payload)
         });
-
-        const result = await res.json();
-
-        if (result.message === "You have already submitted feedback.") {
-          document.querySelector("h1").innerText = "Feedback Already Submitted";
-          document.querySelector("p").innerText = "You have already submitted feedback. Thank you!";
-        } else {
-          document.querySelector("h1").innerText = "Thank You!";
-          document.querySelector("p").innerText = "Your feedback has been recorded.";
-        }
       } catch (e) {
         console.error("Failed to send feedback:", e);
-        document.querySelector("h1").innerText = "Error";
-        document.querySelector("p").innerText = "Something went wrong. Please try again.";
       } finally {
+        // Redirect to SharePoint after 2 seconds
         setTimeout(() => {
           window.location.href = "https://KnowledgeEngr.github.io/RTT-servicefeeback/";
-        }, 4000);
+        }, 2000);
       }
     }
 
@@ -51,9 +41,10 @@
 </head>
 <body style="font-family: sans-serif; text-align: center; padding-top: 100px;">
   <div>
-    <h1><strong>Submitting...</strong></h1>
-    <p style="font-size: 1.25em; margin-top: -10px;">Please wait while we submit your feedback.</p>
-  </div>
+    <h1><strong>Thank you!</strong></h1>
+    <p style="font-size: 1.25em; margin-top: -10px;">
+      Your rating has been recorded.</p>
+   </div>
   <noscript>
     <p>This page requires JavaScript to work.</p>
   </noscript>
