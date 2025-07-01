@@ -27,16 +27,19 @@
         });
 
         const result = await res.json();
+
         if (result.message === "You have already submitted feedback.") {
           document.querySelector("h1").innerText = "Feedback Already Submitted";
-          document.querySelector("p").innerText = "You have already submitted your feedback. Thank you!";
+          document.querySelector("p").innerText = "You have already submitted feedback. Thank you!";
+        } else {
+          document.querySelector("h1").innerText = "Thank You!";
+          document.querySelector("p").innerText = "Your feedback has been recorded.";
         }
       } catch (e) {
         console.error("Failed to send feedback:", e);
         document.querySelector("h1").innerText = "Error";
-        document.querySelector("p").innerText = "There was a problem submitting your feedback.";
+        document.querySelector("p").innerText = "Something went wrong. Please try again.";
       } finally {
-        // Redirect to SharePoint after 4 seconds
         setTimeout(() => {
           window.location.href = "https://KnowledgeEngr.github.io/RTT-servicefeeback/";
         }, 4000);
@@ -48,8 +51,8 @@
 </head>
 <body style="font-family: sans-serif; text-align: center; padding-top: 100px;">
   <div>
-    <h1><strong>Thank you!</strong></h1>
-    <p style="font-size: 1.25em; margin-top: -10px;">Your response has been recorded.</p>
+    <h1><strong>Submitting...</strong></h1>
+    <p style="font-size: 1.25em; margin-top: -10px;">Please wait while we submit your feedback.</p>
   </div>
   <noscript>
     <p>This page requires JavaScript to work.</p>
